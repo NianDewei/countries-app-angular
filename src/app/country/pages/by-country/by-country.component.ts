@@ -15,13 +15,14 @@ export class ByCountryComponent implements OnInit {
 
   // methods
   search(): void {
-    this.error = false
+    this.error = false;
     console.log(this.term);
-    this.countryService.searchCountry(this.term).subscribe(
-      (resp) =>console.log(resp),
-      (err) => {
-        this.error = true;
-      }
-    );
+    this.countryService.searchCountry(this.term).subscribe({
+      // recommended way
+      next: (country) => console.log(country),
+      error: (error) => (this.error = true),
+      complete: () => console.log('Complete'),
+      //------------------------------------------
+    });
   }
 }
