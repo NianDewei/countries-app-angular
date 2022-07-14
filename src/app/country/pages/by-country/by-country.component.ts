@@ -3,14 +3,16 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-by-country',
   templateUrl: './by-country.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class ByCountryComponent implements OnInit {
+  term: string = '';
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  // methods
+  search(): void {
+    console.log(this.term)
   }
-
 }
