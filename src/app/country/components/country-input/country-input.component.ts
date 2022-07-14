@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-country-input',
@@ -7,14 +8,30 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class CountryInputComponent implements OnInit {
   @Output() onEnter: EventEmitter<string> = new EventEmitter();
+  @Output() onDebounce: EventEmitter<string> = new EventEmitter();
+
+  // create an observable that emits
+  debouncer: Subject<string> = new Subject();
+
   term: string = '';
 
   constructor() {}
-
-  ngOnInit(): void {}
+  // Lifecycle | when the component is instantiated
+  ngOnInit(): void {
+    this.debouncer
+    .pipe(debounceTime(300))
+    .subscribe({
+      next: (value: string) => this.onDebounce.emit(value),
+    });
+  }
 
   // methods
   search() {
     this.onEnter.emit(this.term);
+  }
+
+  keyPress() {
+    // emit next value
+    this.debouncer.next(this.term);
   }
 }

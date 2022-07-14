@@ -34,4 +34,9 @@ export class ByCountryComponent implements OnInit {
       //------------------------------------------
     });
   }
+
+  suggestions(term: string){
+    this.error= false
+    // TODO create suggestion list
+  }
 }
