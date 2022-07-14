@@ -11,15 +11,19 @@ export class ByCountryComponent implements OnInit {
   term: string = '';
   error: boolean = false;
   countries: Country[] = [];
+
   constructor(private countryService: CountryService) {}
 
   ngOnInit(): void {}
 
   // methods
-  search(): void {
+  search(term: string): void {
     this.error = false;
-    console.log(this.term);
-    this.countryService.searchCountry(this.term).subscribe({
+    this.term = term;
+
+    console.log(term);
+
+    this.countryService.searchCountry(term).subscribe({
       // recommended way
       next: (countries) => (this.countries = countries),
       error: (error) => {
