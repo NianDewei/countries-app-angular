@@ -16,11 +16,11 @@
 </div>
 <hr>
 
-<div class="alert alert-danger">
-  Nothing found with the term:
+<div class="alert alert-danger" *ngIf="error">
+  Nothing found with the term: <strong>{{term}}</strong>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="!error">
   <div class="col">
     <table class="table table-hover">
       <thead>
