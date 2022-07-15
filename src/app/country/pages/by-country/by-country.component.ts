@@ -23,7 +23,7 @@ export class ByCountryComponent implements OnInit {
 
     console.log(term);
 
-    this.countryService.searchCountry(term).subscribe({
+    this.countryService.searchByCountry(term).subscribe({
       // recommended way
       next: (countries) => (this.countries = countries),
       error: (error) => {

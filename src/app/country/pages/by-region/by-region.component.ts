@@ -1,16 +1,38 @@
 import { Component, OnInit } from '@angular/core';
+import { Country } from '../../interfaces/country.interface';
+import { CountryService } from '../../services/country.service';
 
 @Component({
   selector: 'app-by-region',
   templateUrl: './by-region.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class ByRegionComponent implements OnInit {
+  term: string = '';
+  error: boolean = false;
+  countries: Country[] = [];
 
-  constructor() { }
+  constructor(private countryService: CountryService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  // methods
+  search(term: string): void {
+    this.error = false;
+    this.term = term;
+
+    console.log(term);
+
+    this.countryService.searchByRegion(term).subscribe({
+      // recommended way
+      next: (countries) => (this.countries = countries),
+      error: (error) => {
+        this.error = true;
+        this.countries = [];
+      },
+      complete: () => console.log('Complete'),
+      //------------------------------------------
+    });
   }
 
 }

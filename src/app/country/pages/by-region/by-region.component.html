@@ -1,1 +1,22 @@
-<p>by-region works!</p>
+<h2>By Region</h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <app-country-input
+      (onEnter)="search($event)"
+      placeholder="Search by region..."
+    ></app-country-input>
+  </div>
+</div>
+<hr />
+
+<div class="alert alert-danger" *ngIf="error">
+  Nothing found with the term: <strong>{{ term }}</strong>
+</div>
+
+<div class="row" *ngIf="countries.length > 0">
+  <div class="col">
+    <app-country-table [countries]="countries"></app-country-table>
+  </div>
+</div>
