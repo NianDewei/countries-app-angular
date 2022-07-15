@@ -26,4 +26,9 @@ export class CountryService {
     const url = `${this.apiURL}/region/${term}`;
     return this.http.get<Country[]>(url);
   }
+
+  searchByCode(term: string): Observable<Country> {
+    const url = `${this.apiURL}/alpha/${term}`;
+    return this.http.get<Country>(url);
+  }
 }
