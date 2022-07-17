@@ -1,60 +1,61 @@
-<div *ngIf="!country; else divPais"
-    class="alert alert-info">
-    Espere por favor...
+<div *ngIf="!country; else divPais" class="alert alert-info">
+  Espere por favor...
 </div>
 
-
-
-<ng-template #divPais >
-
+<ng-template #divPais>
+  <div *ngFor="let item of country">
     <div class="row">
-        <div class="col-12">
-            <h1>País: <small>{{country[0].name.common}}</small></h1>
-        </div>
+      <div class="col-12">
+        <h1>
+          País: <small>{{ item.name.common }}</small>
+        </h1>
+      </div>
     </div>
-
     <div class="row">
-        <div class="col-4">
-            <h3>Bandera</h3>
-            <img [src]="country[0].flags.svg" class="img-thumbnail" />
-        </div>
+      <div class="col-4">
+        <h3>Bandera</h3>
+        <img [src]="item.flags.svg" class="img-thumbnail" />
+      </div>
 
-        <div class="col">
-            <h3>Información</h3>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <strong>Población</strong> {{ country[0].population | number }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Código numérico</strong> {{ country[0].ccn3 }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Código alpha3</strong> {{ country[0].cca3 }}
-                </li>
-            </ul>
-        </div>
-
-
+      <div class="col">
+        <h3>Información</h3>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>Población</strong> {{ item.population | number }}
+          </li>
+          <li class="list-group-item">
+            <strong>Código numérico</strong> {{ item.ccn3 }}
+          </li>
+          <li class="list-group-item">
+            <strong>Código alpha3</strong> {{ item.cca3 }}
+          </li>
+        </ul>
+      </div>
     </div>
 
     <h3>Traducciones</h3>
     <div class="row">
-        <div class="col">
-
-            <span class="badge bg-primary mr-1">{{country[0].translations['spa'].official}}</span>
-            <span class="badge bg-primary mr-1">{{country[0].translations['slk'].official}}</span>
-            <span class="badge bg-primary mr-1">{{country[0].translations['swe'].official}}</span>
-            <span class="badge bg-primary mr-1">{{country[0].translations['zho'].official}}</span>
-            <span class="badge bg-primary mr-1">{{country[0].translations['per'].official}}</span>
-
-
-        </div>
+      <div class="col">
+        <span class="badge bg-primary mr-1">{{
+          item.translations["spa"].official
+        }}</span>
+        <span class="badge bg-primary mr-1">{{
+          item.translations["slk"].official
+        }}</span>
+        <span class="badge bg-primary mr-1">{{
+          item.translations["swe"].official
+        }}</span>
+        <span class="badge bg-primary mr-1">{{
+          item.translations["zho"].official
+        }}</span>
+        <span class="badge bg-primary mr-1">{{
+          item.translations["per"].official
+        }}</span>
+      </div>
     </div>
+  </div>
 
-
-    <!-- <pre class="mt-5">
+  <!-- <pre class="mt-5">
         {{ pais | json }}
     </pre> -->
-
-
 </ng-template>
