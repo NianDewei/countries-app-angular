@@ -5,12 +5,14 @@ import { CountryService } from '../../services/country.service';
 @Component({
   selector: 'app-by-country',
   templateUrl: './by-country.component.html',
-  styles: [],
+  styleUrls: ['./by-country.component.sass'],
 })
 export class ByCountryComponent implements OnInit {
   term: string = '';
   error: boolean = false;
+  seeSuggested: boolean = false;
   countries: Country[] = [];
+  suggestedCountries: Country[] = [];
 
   constructor(private countryService: CountryService) {}
 
@@ -21,8 +23,6 @@ export class ByCountryComponent implements OnInit {
     this.error = false;
     this.term = term;
 
-    console.log(term);
-
     this.countryService.searchByCountry(term).subscribe({
       // recommended way
       next: (countries) => (this.countries = countries),
@@ -30,13 +30,24 @@ export class ByCountryComponent implements OnInit {
         this.error = true;
         this.countries = [];
       },
-      complete: () => console.log('Complete'),
+      complete: () => {
+        this.suggestedCountries = [];
+        this.seeSuggested = false;
+      },
       //------------------------------------------
     });
   }
 
-  suggestions(term: string){
-    this.error= false
-    // TODO create suggestion list
+  getSuggestions(term: string) {
+    this.error = false;
+    this.seeSuggested = true;
+    this.term = term;
+    this.countryService.searchByCountry(term).subscribe({
+      next: (data) => (this.suggestedCountries = data.splice(0, 4)),
+      error: () => {
+        this.suggestedCountries = [];
+        this.seeSuggested = false;
+      },
+    });
   }
 }

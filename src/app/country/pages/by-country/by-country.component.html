@@ -1,22 +1,41 @@
-<h2>By Country</h2>
-<hr />
+<div class="animate__animated animate__fadeIn">
+  <h2>By Country</h2>
+  <hr />
 
-<div class="row">
-  <div class="col">
-    <app-country-input
-      (onEnter)="search($event)"
-      (onDebounce)="suggestions($event)"
-      placeholder="Search by country..."
-    ></app-country-input>
+  <div class="row">
+    <div class="col">
+      <app-country-input
+        (onEnter)="search($event)"
+        (onDebounce)="getSuggestions($event)"
+        placeholder="Search by country..."
+      ></app-country-input>
+    </div>
   </div>
+  <hr />
+
+  <ul class="list-group mt-2" *ngIf="seeSuggested">
+    <div class="shadow">
+      <li
+        class="list-group-item list-group-item-action"
+        *ngFor="let country of suggestedCountries"
+      >
+        <a class="nav-link p-0" [routerLink]="['/country', country.ccn3]">
+          {{ country.name.common }}
+        </a>
+      </li>
+
+      <li class="list-group-item list-group-item-action" (click)="search(term)">
+        <a class="nav-link p-0 text-dark"> Buscar: <span class="text-primary">{{ term }}</span></a>
+      </li>
+    </div>
+  </ul>
 </div>
-<hr />
 
 <div class="alert alert-danger" *ngIf="error">
   Nothing found with the term: <strong>{{ term }}</strong>
 </div>
 
-<div class="row" *ngIf="countries.length > 0">
+<div class="row mt-4" *ngIf="countries.length > 0">
   <div class="col">
     <app-country-table [countries]="countries"></app-country-table>
   </div>
