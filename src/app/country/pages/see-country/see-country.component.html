@@ -3,57 +3,57 @@
 </div>
 
 <ng-template #divPais>
-  <div *ngFor="let item of country">
-    <div class="row">
-      <div class="col-12">
-        <h1>
-          País: <small>{{ item.name.common }}</small>
-        </h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-4">
-        <h3>Bandera</h3>
-        <img [src]="item.flags.svg" class="img-thumbnail" />
-      </div>
-
-      <div class="col">
-        <h3>Información</h3>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <strong>Población</strong> {{ item.population | number }}
-          </li>
-          <li class="list-group-item">
-            <strong>Código numérico</strong> {{ item.ccn3 }}
-          </li>
-          <li class="list-group-item">
-            <strong>Código alpha3</strong> {{ item.cca3 }}
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <h3>Traducciones</h3>
-    <div class="row">
-      <div class="col">
-        <span class="badge bg-primary mr-1">{{
-          item.translations["spa"].official
-        }}</span>
-        <span class="badge bg-primary mr-1">{{
-          item.translations["slk"].official
-        }}</span>
-        <span class="badge bg-primary mr-1">{{
-          item.translations["swe"].official
-        }}</span>
-        <span class="badge bg-primary mr-1">{{
-          item.translations["zho"].official
-        }}</span>
-        <span class="badge bg-primary mr-1">{{
-          item.translations["per"].official
-        }}</span>
-      </div>
+  <!-- <div *ngFor="let country of country"> -->
+  <div class="row">
+    <div class="col-12">
+      <h1>
+        País: <small>{{ country.name.common }}</small>
+      </h1>
     </div>
   </div>
+  <div class="row">
+    <div class="col-4">
+      <h3>Bandera</h3>
+      <img [src]="country.flags.svg" class="img-thumbnail" />
+    </div>
+
+    <div class="col">
+      <h3>Información</h3>
+      <ul class="list-group">
+        <li class="list-group-country">
+          <strong>Población</strong> {{ country.population | number }}
+        </li>
+        <li class="list-group-country">
+          <strong>Código numérico</strong> {{ country.ccn3 }}
+        </li>
+        <li class="list-group-country">
+          <strong>Código alpha3</strong> {{ country.cca3 }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Traducciones</h3>
+  <div class="row">
+    <div class="col">
+      <span class="badge bg-primary mr-1">{{
+        country.translations["spa"].official
+      }}</span>
+      <span class="badge bg-primary mr-1">{{
+        country.translations["slk"].official
+      }}</span>
+      <span class="badge bg-primary mr-1">{{
+        country.translations["swe"].official
+      }}</span>
+      <span class="badge bg-primary mr-1">{{
+        country.translations["zho"].official
+      }}</span>
+      <span class="badge bg-primary mr-1">{{
+        country.translations["per"].official
+      }}</span>
+    </div>
+  </div>
+  <!-- </div> -->
 
   <!-- <pre class="mt-5">
         {{ pais | json }}

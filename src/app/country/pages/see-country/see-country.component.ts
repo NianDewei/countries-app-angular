@@ -10,7 +10,7 @@ import { CountryService } from '../../services/country.service';
   styles: [],
 })
 export class SeeCountryComponent implements OnInit {
-  country!: Country[];
+  country!: Country;
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -23,7 +23,7 @@ export class SeeCountryComponent implements OnInit {
       .pipe(switchMap(({ id }) => this.countryService.searchByCode(id)))
       //preview code
       .subscribe({
-        next: (data: Country[]) => this.country = data,
+        next: (data: Country) => this.country = data,
         error: (error: Error) => console.log('Not Found'),
       });
 
